@@ -1,4 +1,4 @@
-# Template for Isaac Lab Projects
+# Imitation learning for Isaac Lab Projects
 
 ## Overview
 
