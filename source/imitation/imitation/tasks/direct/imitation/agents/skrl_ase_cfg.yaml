@@ -16,7 +16,7 @@ models:
     network:
       - name: net
         input: OBSERVATIONS
-        layers: [1024, 512]
+        layers: [512, 512, 512]
         activations: relu
     output: ACTIONS
   value:  # see deterministic_model parameters
@@ -25,7 +25,7 @@ models:
     network:
       - name: net
         input: OBSERVATIONS
-        layers: [1024, 512]
+        layers: [512, 512, 512]
         activations: relu
     output: ONE
   discriminator:  # see deterministic_model parameters
@@ -34,9 +34,18 @@ models:
     network:
       - name: net
         input: OBSERVATIONS
-        layers: [1024, 512]
+        layers: [1024, 1024, 512]
         activations: relu
     output: ONE
+  encoder:
+    class: DeterministicMixin
+    clip_actions: False
+    network:
+      - name: net
+        input: OBSERVATIONS
+        layers: [1024, 1024, 512]
+        activations: relu
+    output: ACTIONS
 
 
 # Rollout memory
@@ -61,7 +70,7 @@ reply_buffer:
 # AMP agent configuration (field names are from AMP_CFG)
 # https://skrl.readthedocs.io/en/latest/api/agents/amp.html
 agent:
-  class: AMP
+  class: ASE
   rollouts: 24
   learning_epochs: 5
   mini_batches: 4
@@ -89,14 +98,17 @@ agent:
   task_reward_scale: 0.0
   style_reward_scale: 1.0
   discriminator_batch_size: 4096
+  discriminator_reward_scale: 2.0
   discriminator_logit_regularization_scale: 0.05
   discriminator_gradient_penalty_scale: 5.0
   discriminator_weight_decay_scale: 1.0e-04
-  # rewards_shaper_scale: 1.0
+  mi_reward_scale: 0.1
+  encoder_loss_scale: 1.0
+  latent_dim: 64
   time_limit_bootstrap: False
   # logging and checkpoint
   experiment:
-    directory: "humanoid_amp_walk"
+    directory: "humanoid_ase_walk"
     experiment_name: ""
     write_interval: auto
     checkpoint_interval: auto

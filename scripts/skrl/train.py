@@ -120,6 +120,7 @@ from isaaclab_tasks.utils.hydra import hydra_task_config
 logger = logging.getLogger(__name__)
 
 import imitation.tasks  # noqa: F401
+from imitation.tasks.utils import ASERunner
 
 # config shortcuts
 if args_cli.agent is None:
@@ -225,7 +226,8 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg | DirectMARLEnvCfg, agen
 
     # configure and instantiate the skrl runner
     # https://skrl.readthedocs.io/en/latest/api/utils/runner.html
-    runner = Runner(env, agent_cfg)
+    runner_cls = ASERunner if algorithm == "ase" else Runner
+    runner = runner_cls(env, agent_cfg)
 
     # load checkpoint (if specified)
     if resume_path:

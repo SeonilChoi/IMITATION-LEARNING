@@ -1,0 +1,420 @@
+<?xml version="1.0" ?>
+<robot name="olaf">
+
+<joint name="trunk_frame" type="fixed">
+  <origin xyz="0.0 0.0 0.3" rpy="0 0 0" />
+  <parent link="pelvis" />
+  <child link="trunk" />
+  <axis xyz="0 0 0"/>
+</joint>
+
+<joint name="left_hip_yaw" type="revolute">
+  <origin xyz="-0.000138 0.055638 0.3" rpy="0 0 0"/>
+  <parent link="pelvis"/>
+  <child link="left_hip_rotation"/>
+  <axis xyz="0.0 0.0 1.0"/>
+  <limit lower="-0.7853982" upper="0.7853982" effort="23.7" velocity="30"/>
+</joint>
+
+<joint name="left_hip_roll" type="revolute">
+  <origin xyz="-0.0564 1e-06 -0.05575" rpy="0 0 0"/>
+  <parent link="left_hip_rotation"/>
+  <child link="left_hip"/>
+  <axis xyz="1.0 -0.0 0.0"/>
+  <limit lower="-1.57" upper="0.7853982" effort="23.7" velocity="30"/>
+</joint>
+
+<joint name="left_hip_pitch" type="revolute">
+  <origin xyz="0.05675 0.01945 -0.011502" rpy="0 0 0"/>
+  <parent link="left_hip"/>
+  <child link="left_thigh"/>
+  <axis xyz="0.0 -1.0 0.0"/>
+  <limit lower="-1.57" upper="1.57" effort="23.7" velocity="30"/>
+</joint>
+
+<joint name="left_knee" type="revolute">
+  <origin xyz="-3e-06 0.005001 -0.07" rpy="0 0 0"/>
+  <parent link="left_thigh"/>
+  <child link="left_shin"/>
+  <axis xyz="0.0 -1.0 0.0"/>
+  <limit lower="-1.57" upper="1.57" effort="23.7" velocity="30"/>
+</joint>
+
+<joint name="left_ankle_pitch" type="revolute">
+  <origin xyz="4.3e-05 0.004601 -0.08575" rpy="0 0 0"/>
+  <parent link="left_shin"/>
+  <child link="left_foot_rotation"/>
+  <axis xyz="-0.0 1.0 0.0"/>
+  <limit lower="-1.57" upper="1.57" effort="23.7" velocity="30"/>
+</joint>
+
+<joint name="left_ankle_roll" type="revolute">
+  <origin xyz="-0.015764 -0.012761 -0.044999" rpy="0 0 0"/>
+  <parent link="left_foot_rotation"/>
+  <child link="left_foot_link"/>
+  <axis xyz="1.0 0.0 0.0"/>
+  <limit lower="-3.14" upper="3.14" effort="23.7" velocity="30"/>
+</joint>
+
+<joint name="left_foot_frame" type="fixed">
+    <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+    <parent link="left_foot_link" />
+    <child link="left_foot" />
+    <axis xyz="0 0 0"/>
+</joint>
+
+<joint name="right_hip_yaw" type="revolute">
+  <origin xyz="-0.001138 -0.054362 0.3" rpy="0 0 0"/>
+  <parent link="pelvis"/>
+  <child link="right_hip_rotation"/>
+  <axis xyz="-0.0 0.0 1.0"/>
+  <limit lower="-0.7853982" upper="0.7853982" effort="23.7" velocity="30"/>
+</joint>
+
+<joint name="right_hip_roll" type="revolute">
+  <origin xyz="0.0564 0.0 -0.05575" rpy="0 0 0"/>
+  <parent link="right_hip_rotation"/>
+  <child link="right_hip"/>
+  <axis xyz="-1.0 0.0 -0.0"/>
+  <limit lower="-1.57" upper="0.7853982" effort="23.7" velocity="30"/>
+</joint>
+
+<joint name="right_hip_pitch" type="revolute">
+  <origin xyz="-0.056751 -0.01945 -0.011502" rpy="0 0 0"/>
+  <parent link="right_hip"/>
+  <child link="right_thigh"/>
+  <axis xyz="-0.0 -1.0 1.3e-05"/>
+  <limit lower="-1.57" upper="1.57" effort="23.7" velocity="30"/>
+</joint>
+
+<joint name="right_knee" type="revolute">
+  <origin xyz="3e-06 -0.005001 -0.07" rpy="0 0 0"/>
+  <parent link="right_thigh"/>
+  <child link="right_shin"/>
+  <axis xyz="0.0 -1.0 0.0"/>
+  <limit lower="-1.57" upper="1.57" effort="23.7" velocity="30"/>
+</joint>
+
+<joint name="right_ankle_pitch" type="revolute">
+  <origin xyz="-4.3e-05 -0.004601 -0.08575" rpy="0 0 0"/>
+  <parent link="right_shin"/>
+  <child link="right_foot_rotation"/>
+  <axis xyz="0.0 -1.0 0.0"/>
+  <limit lower="-1.57" upper="1.57" effort="23.7" velocity="30"/>
+</joint>
+
+<joint name="right_ankle_roll" type="revolute">
+  <origin xyz="0.015764 0.012761 -0.044999" rpy="0 0 0"/>
+  <parent link="right_foot_rotation"/>
+  <child link="right_foot_link"/>
+  <axis xyz="-1.0 0.0 0.0"/>
+  <limit lower="-3.14" upper="3.14" effort="23.7" velocity="30"/>
+</joint>
+
+<joint name="right_foot_frame" type="fixed">
+    <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+    <parent link="right_foot_link" />
+    <child link="right_foot" />
+    <axis xyz="0 0 0"/>
+</joint>
+
+
+<link name="trunk">
+  <inertial>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <mass value="1e-9" />
+    <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+  </inertial>
+</link>
+
+<link name="pelvis">
+  <inertial>
+    <origin xyz="0.0 0.0 0.0" rpy="0 0 0.3"/>
+    <mass value="2.075931281689636"/>
+    <inertia ixx="0.008689" iyy="0.006488" izz="0.014633" ixy="-2e-05" iyz="-3e-06" ixz="3e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="C:/imitation_learning/imitation/source/imitation/imitation/assets/meshes/olaf/pelvis.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="C:/imitation_learning/imitation/source/imitation/imitation/assets/meshes/olaf/pelvis.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_hip_rotation">
+  <inertial>
+    <origin xyz="-0.07026899659691868 -0.00022854318918891225 -0.047401873080982156" rpy="0 0 0"/>
+    <mass value="0.5529873669984209"/>
+    <inertia ixx="0.000781" iyy="0.000725" izz="0.000564" ixy="-2e-06" iyz="2e-06" ixz="-0.000119"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.000138 -0.055638 0.007" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="C:/imitation_learning/imitation/source/imitation/imitation/assets/meshes/olaf/right_hip_rotation.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.000138 -0.055638 0.007" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="C:/imitation_learning/imitation/source/imitation/imitation/assets/meshes/olaf/right_hip_rotation.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_hip">
+  <inertial>
+    <origin xyz="0.0456446431200058 0.0005161017308476928 -0.010263807799870794" rpy="0 0 0"/>
+    <mass value="0.5866748126521483"/>
+    <inertia ixx="0.000424" iyy="0.000878" izz="0.000651" ixy="-4e-06" iyz="-1e-06" ixz="3.5e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.056538 -0.055639 0.06275" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="C:/imitation_learning/imitation/source/imitation/imitation/assets/meshes/olaf/right_hip.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.056538 -0.055639 0.06275" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="C:/imitation_learning/imitation/source/imitation/imitation/assets/meshes/olaf/right_hip.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_thigh">
+  <inertial>
+    <origin xyz="-1.6884765495961862e-06 0.002500649521969364 -0.035000124798710786" rpy="0 0 0"/>
+    <mass value="0.20336221361238202"/>
+    <inertia ixx="0.000222" iyy="0.00028" izz="5.8e-05" ixy="0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.000212 -0.075089 0.074252" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="C:/imitation_learning/imitation/source/imitation/imitation/assets/meshes/olaf/right_thigh.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.000212 -0.075089 0.074252" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="C:/imitation_learning/imitation/source/imitation/imitation/assets/meshes/olaf/right_thigh.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_shin">
+  <inertial>
+    <origin xyz="0.000233010801394156 0.017991245657824145 -0.011181160566265669" rpy="0 0 0"/>
+    <mass value="0.5669545830968397"/>
+    <inertia ixx="0.000691" iyy="0.000915" izz="0.000394" ixy="-2e-06" iyz="-2.8e-05" ixz="1e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.000209 -0.08009 0.144252" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="C:/imitation_learning/imitation/source/imitation/imitation/assets/meshes/olaf/right_shin.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.000209 -0.08009 0.144252" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="C:/imitation_learning/imitation/source/imitation/imitation/assets/meshes/olaf/right_shin.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_foot_rotation">
+  <inertial>
+    <origin xyz="-0.0017148200721978574 -0.01856715983182468 -0.008126978149074454" rpy="0 0 0"/>
+    <mass value="0.6136768818052651"/>
+    <inertia ixx="0.000359" iyy="0.000321" izz="0.000188" ixy="9e-06" iyz="3.5e-05" ixz="-2.9e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.000252 -0.084691 0.230002" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="C:/imitation_learning/imitation/source/imitation/imitation/assets/meshes/olaf/right_foot_rotation.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.000252 -0.084691 0.230002" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="C:/imitation_learning/imitation/source/imitation/imitation/assets/meshes/olaf/right_foot_rotation.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_foot_link">
+  <inertial>
+    <origin xyz="0.014639343594589195 -3.614042462934952e-07 -0.005736579750067972" rpy="0 0 0"/>
+    <mass value="0.5337193876053451"/>
+    <inertia ixx="0.000211" iyy="0.000228" izz="0.000263" ixy="0.0" iyz="-0.0" ixz="-1.2e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.015512 -0.07193 0.275001" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="C:/imitation_learning/imitation/source/imitation/imitation/assets/meshes/olaf/right_foot_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.015512 -0.07193 0.275001" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="C:/imitation_learning/imitation/source/imitation/imitation/assets/meshes/olaf/right_foot_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_foot">
+  <inertial>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <mass value="1e-9" />
+    <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+  </inertial>
+</link>
+
+<link name="right_hip_rotation">
+  <inertial>
+    <origin xyz="0.07026812285350739 0.00022941693260431634 -0.04740187308098024" rpy="0 0 0"/>
+    <mass value="0.5529873669984209"/>
+    <inertia ixx="0.000781" iyy="0.000725" izz="0.000564" ixy="-2e-06" iyz="-2e-06" ixz="0.000119"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.001138 0.054362 0.007" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="C:/imitation_learning/imitation/source/imitation/imitation/assets/meshes/olaf/left_hip_rotation.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.001138 0.054362 0.007" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="C:/imitation_learning/imitation/source/imitation/imitation/assets/meshes/olaf/left_hip_rotation.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_hip">
+  <inertial>
+    <origin xyz="-0.04564551686341684 -0.0005162279874322481 -0.010263807799870614" rpy="0 0 0"/>
+    <mass value="0.5866748126521483"/>
+    <inertia ixx="0.000424" iyy="0.000878" izz="0.000651" ixy="-4e-06" iyz="1e-06" ixz="-3.5e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.055262 0.054362 0.06275" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="C:/imitation_learning/imitation/source/imitation/imitation/assets/meshes/olaf/left_hip.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.055262 0.054362 0.06275" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="C:/imitation_learning/imitation/source/imitation/imitation/assets/meshes/olaf/left_hip.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_thigh">
+  <inertial>
+    <origin xyz="1.8147331405657732e-06 -0.002500775778554898 -0.035000124798710924" rpy="0 0 0"/>
+    <mass value="0.20336221361238202"/>
+    <inertia ixx="0.000222" iyy="0.00028" izz="5.8e-05" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.001489 0.073812 0.074252" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="C:/imitation_learning/imitation/source/imitation/imitation/assets/meshes/olaf/left_thigh.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.001489 0.073812 0.074252" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="C:/imitation_learning/imitation/source/imitation/imitation/assets/meshes/olaf/left_thigh.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_shin">
+  <inertial>
+    <origin xyz="-0.00023288454480256335 -0.01799137191440872 -0.011181160566265919" rpy="0 0 0"/>
+    <mass value="0.5669545830968397"/>
+    <inertia ixx="0.000691" iyy="0.000915" izz="0.000394" ixy="-2e-06" iyz="2.8e-05" ixz="-1e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.001486 0.078813 0.144252" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="C:/imitation_learning/imitation/source/imitation/imitation/assets/meshes/olaf/left_shin.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.001486 0.078813 0.144252" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="C:/imitation_learning/imitation/source/imitation/imitation/assets/meshes/olaf/left_shin.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_foot_rotation">
+  <inertial>
+    <origin xyz="0.001714946328791715 0.018567033575240185 -0.008126978149074648" rpy="0 0 0"/>
+    <mass value="0.6136768818052651"/>
+    <inertia ixx="0.000359" iyy="0.000321" izz="0.000188" ixy="9e-06" iyz="-3.5e-05" ixz="2.9e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.001529 0.083414 0.230002" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="C:/imitation_learning/imitation/source/imitation/imitation/assets/meshes/olaf/left_foot_rotation.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.001529 0.083414 0.230002" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="C:/imitation_learning/imitation/source/imitation/imitation/assets/meshes/olaf/left_foot_rotation.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_foot_link">
+  <inertial>
+    <origin xyz="-0.014639217337994097 2.3514766180066093e-07 -0.005736579750068083" rpy="0 0 0"/>
+    <mass value="0.5337193876053451"/>
+    <inertia ixx="0.000211" iyy="0.000228" izz="0.000263" ixy="0.0" iyz="0.0" ixz="1.2e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.014235 0.070653 0.275001" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="C:/imitation_learning/imitation/source/imitation/imitation/assets/meshes/olaf/left_foot_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.014235 0.070653 0.275001" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="C:/imitation_learning/imitation/source/imitation/imitation/assets/meshes/olaf/left_foot_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_foot">
+  <inertial>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <mass value="1e-9" />
+    <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+  </inertial>
+</link>
+
+
+</robot>
